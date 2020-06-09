@@ -1,4 +1,4 @@
-package krd.antonov.connection;
+package krd.antonov.db.connection;
 
 import org.apache.log4j.Logger;
 
@@ -17,7 +17,6 @@ class ConnectionHelper {
     static Connection getConnection() {
         try {
             DriverManager.registerDriver(new org.postgresql.Driver());
-
             String url = "jdbc:postgresql://" +
                     "localhost:" +
                     "8888/" +
@@ -25,7 +24,7 @@ class ConnectionHelper {
             getAuthData();
             return DriverManager.getConnection(url, properties.getProperty("user"), properties.getProperty("pass"));
         } catch (SQLException e) {
-
+            logger.error("Connection error :", e);
             throw new RuntimeException(e);
         }
     }

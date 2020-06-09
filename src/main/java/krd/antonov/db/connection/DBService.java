@@ -1,4 +1,6 @@
-package krd.antonov.base;
+package krd.antonov.db.connection;
+
+import krd.antonov.db.dataset.UsersDataSet;
 
 import java.sql.SQLException;
 import java.util.List;

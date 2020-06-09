@@ -1,7 +1,6 @@
-package krd.antonov.connection;
+package krd.antonov.db.connection;
 
-import krd.antonov.base.DBService;
-import krd.antonov.base.UsersDataSet;
+import krd.antonov.db.dataset.UsersDataSet;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;
@@ -33,12 +32,10 @@ public class DBServiceConnection implements DBService {
 
     @Override
     public void prepareTable() throws SQLException {
-
     }
 
     @Override
     public void addUser(String name, int age) throws SQLException {
-
     }
 
     @Override

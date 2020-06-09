@@ -1,18 +1,18 @@
-package krd.antonov.base;
+package krd.antonov.db.dataset;
 
-public class UsersDataSet {
-    private final long id;
+public class UsersDataSet extends DataSet {
+
     private final String name;
     private final int age;
 
     public UsersDataSet(long id, String name, int age) {
-        this.id = id;
+        super(id);
         this.name = name;
         this.age = age;
     }
 
     public long getId() {
-        return id;
+        return super.getId();
     }
 
     public String getName() {
@@ -26,7 +26,7 @@ public class UsersDataSet {
     @Override
     public String toString() {
         return "UsersDataSet{" +
-                "id=" + id +
+                "id=" + super.getId() +
                 ", name='" + name + '\'' +
                 ", age=" + age +
                 '}';
