@@ -1,11 +1,12 @@
 package krd.antonov.db.connection;
 
-import krd.antonov.db.dataset.UsersDataSet;
+import krd.antonov.db.dataset.DataSet;
+import krd.antonov.db.dataset.UserDataSet;
+import krd.antonov.db.executor.Executor;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class DBServiceConnection implements DBService {
@@ -32,30 +33,32 @@ public class DBServiceConnection implements DBService {
 
     @Override
     public void prepareTable() throws SQLException {
+        Executor exec = new Executor(getConnection());
+        exec.execUpdate("CREATE TABLE IF NOT EXISTS USERS " +
+                "(ID SERIAL NOT NULL, NAME VARCHAR(255), AGE BIGINT, PRIMARY KEY (ID))");
+        logger.info("Table USERS created");
     }
 
     @Override
-    public void addUser(String name, int age) throws SQLException {
+    public <T extends DataSet> void saveUser(T user) throws SQLException {
+        Executor exec = new Executor(getConnection());
     }
 
     @Override
-    public String getUserName(int id) throws SQLException {
+    public <T extends DataSet> T loadUser(long id, Class<T> clazz) throws SQLException {
         return null;
     }
 
     @Override
-    public List<String> getAllNames() throws SQLException {
-        return new ArrayList<>();
+    public List<UserDataSet> getAllUsers() throws SQLException {
+        return null;
     }
 
     @Override
-    public List<UsersDataSet> getAllUsers() throws SQLException {
-        return new ArrayList<>();
-    }
-
-    @Override
-    public void deleteTables() throws SQLException {
-
+    public void deleteTable() throws SQLException {
+        Executor exec = new Executor(getConnection());
+        exec.execUpdate("DROP TABLE USERS");
+        logger.info("Table USERS dropped");
     }
 
     @Override

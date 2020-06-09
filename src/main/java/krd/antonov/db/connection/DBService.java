@@ -1,6 +1,7 @@
 package krd.antonov.db.connection;
 
-import krd.antonov.db.dataset.UsersDataSet;
+import krd.antonov.db.dataset.DataSet;
+import krd.antonov.db.dataset.UserDataSet;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -11,13 +12,11 @@ public interface DBService extends AutoCloseable {
 
     void prepareTable() throws SQLException;
 
-    void addUser(String name, int age) throws SQLException;
+    <T extends DataSet> void saveUser(T user) throws SQLException;
 
-    String getUserName(int id) throws SQLException;
+    <T extends DataSet> T loadUser(long id, Class<T> clazz) throws SQLException;
 
-    List<String> getAllNames() throws SQLException;
+    List<UserDataSet> getAllUsers() throws SQLException;
 
-    List<UsersDataSet> getAllUsers() throws SQLException;
-
-    void deleteTables() throws SQLException;
+    void deleteTable() throws SQLException;
 }

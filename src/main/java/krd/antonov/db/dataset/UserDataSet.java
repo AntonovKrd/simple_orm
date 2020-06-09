@@ -1,11 +1,11 @@
 package krd.antonov.db.dataset;
 
-public class UsersDataSet extends DataSet {
+public class UserDataSet extends DataSet {
 
     private final String name;
     private final int age;
 
-    public UsersDataSet(long id, String name, int age) {
+    public UserDataSet(long id, String name, int age) {
         super(id);
         this.name = name;
         this.age = age;
