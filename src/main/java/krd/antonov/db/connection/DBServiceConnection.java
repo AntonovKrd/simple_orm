@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DBServiceConnection implements DBService {
@@ -42,16 +43,35 @@ public class DBServiceConnection implements DBService {
     @Override
     public <T extends DataSet> void saveUser(T user) throws SQLException {
         Executor exec = new Executor(getConnection());
+        UserDataSet userDS = (UserDataSet) user;
+        int rows = exec.execUpdate(String.format("INSERT INTO USERS (name, age) VALUES ('%s', %d)", userDS.getName(), userDS.getAge()));
+        logger.info("User added. Rows changed: " + rows);
     }
 
     @Override
     public <T extends DataSet> T loadUser(long id, Class<T> clazz) throws SQLException {
-        return null;
+        Executor exec = new Executor(getConnection());
+        if (clazz.equals(UserDataSet.class)) {
+            return exec.execQuery(String.format("SELECT * FROM USERS WHERE ID = %d", id), resultSet -> {
+                if (resultSet.next())
+                    return (T) new UserDataSet(resultSet.getInt("ID"),resultSet.getString("NAME"), resultSet.getInt("AGE"));
+                else return null;
+            });
+        } else return null;
     }
 
     @Override
-    public List<UserDataSet> getAllUsers() throws SQLException {
-        return null;
+    public <T> List<? extends DataSet> getAllUsers(Class<T> clazz) throws SQLException {
+        Executor exec = new Executor(getConnection());
+        if (clazz.equals(UserDataSet.class)){
+            return exec.execQuery("SELECT * FROM USERS", resultSet -> {
+                List<UserDataSet> users = new ArrayList<>();
+                while (resultSet.next()) {
+                    users.add(new UserDataSet(resultSet.getInt("ID"),resultSet.getString("NAME"), resultSet.getInt("AGE")));
+                }
+                return users;
+            });
+        } else return null;
     }
 
     @Override

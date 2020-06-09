@@ -5,8 +5,13 @@ public class UserDataSet extends DataSet {
     private final String name;
     private final int age;
 
-    public UserDataSet(long id, String name, int age) {
-        super(id);
+    public UserDataSet(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public UserDataSet(int id, String name, int age) {
+        setId(id);
         this.name = name;
         this.age = age;
     }
@@ -14,6 +19,7 @@ public class UserDataSet extends DataSet {
     public long getId() {
         return super.getId();
     }
+
 
     public String getName() {
         return name;

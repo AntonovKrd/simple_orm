@@ -54,7 +54,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>krd.antonov.*</mainClass>
+                            <mainClass>krd.antonov.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -79,7 +79,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>krd.antonov.*</mainClass>
+                            <mainClass>krd.antonov.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
